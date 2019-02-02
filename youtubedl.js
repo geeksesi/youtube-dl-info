@@ -2,7 +2,7 @@ const { exec } = require('child_process');
 let fs         = require('fs');
 
 
-function youtube_info(link)
+function youtube_info(link, cb)
 {
 	let youtube_array = {};
 	link              = decodeURI(link);
@@ -70,7 +70,7 @@ function youtube_info(link)
 				youtube_array.formats.push(form);
 			}
 		}
-		return youtube_array;
+	  cb(youtube_array);
 	});
 }
 
