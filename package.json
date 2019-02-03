@@ -1,11 +1,27 @@
 {
-  "name": "youtube-dl",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
-  "scripts": {
-    "test": "node index.js"
-  },
-  "author": "",
-  "license": "ISC"
+	"name"           : "youtube-info",
+	"version"        : "1.0.0",
+	"description"    : "a simple library for get a detail of an youtube link",
+	"repository"     : {
+		"type" : "git",
+		"url"  : "https://github.com/geeksesi/youtube-info"
+	},
+	"keywords"       : [
+		"youtube",
+		"youtube-dl",
+		"youtube download",
+		"download form youtube"
+	],
+	"main"           : "index.js",
+	"scripts"        : {
+		"test" : "node index.js"
+	},
+	"author"         : "Mohammad Javad Ghasemy",
+	"license"        : "MIT",
+	"readmeFilename" : "README.md",
+	"bugs"           : {
+		"url" : "https://github.com/geeksesi/youtube-info/issues"
+	},
+	"homepage": "https://github.com/geeksesi/youtube-info"
+	
 }

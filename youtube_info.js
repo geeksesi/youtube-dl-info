@@ -6,7 +6,7 @@ function youtube_info(link, cb)
 {
 	let youtube_array = {};
 	link              = decodeURI(link);
-	link              = "youtube-dl '" + link + "' -s -J";
+	link              = "youtube-dl '" + link + "' --write-auto-sub -s -J";
 	exec(link, { maxBuffer : 1000 * 4096 }, (error, stdout, stderr) =>
 	{
 		if ( error !== null )
@@ -25,17 +25,23 @@ function youtube_info(link, cb)
 		if ( typeof data["_type"] != null && data["_type"] === "playlist" )
 		{
 			youtube_array = {
-				type : "play_list",
-				parts : []
+				type  : "playlist",
+				parts : [],
 			};
 			for ( let episods of data.entries )
 			{
 				let parts = {
 					title       : episods.title,
 					thumbnail   : episods.thumbnail,
-					description : episods.description,
 					formats     : [],
 				};
+				for ( let sub of episods.automatic_captions.en )
+				{
+					if ( sub.ext === "vtt" )
+					{
+						parts.subtitle = sub.url;
+					}
+				}
 				for ( let format of episods.formats )
 				{
 					let form = {
@@ -53,11 +59,23 @@ function youtube_info(link, cb)
 		else
 		{
 			youtube_array = {
+				type  : "single",
+				parts : [],
+
+			};
+			part          = {
 				title       : data.title,
 				thumbnail   : data.thumbnail,
-				description : data.description,
+				// subtitle    : "",
 				formats     : [],
 			};
+			for ( let sub of data.automatic_captions.en )
+			{
+				if ( sub.ext === "vtt" )
+				{
+					part.subtitle = sub.url;
+				}
+			}
 			for ( let format of data.formats )
 			{
 				let form = {
@@ -67,10 +85,11 @@ function youtube_info(link, cb)
 					url  : format.url,
 					desc : format.format,
 				};
-				youtube_array.formats.push(form);
+				part.formats.push(form);
 			}
+			youtube_array.parts.push(part);
 		}
-	  cb(youtube_array);
+		cb(youtube_array);
 	});
 }
 
