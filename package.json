@@ -1,5 +1,5 @@
 {
-	"name"           : "youtube-info",
+	"name"           : "speedster-youtube-info",
 	"version"        : "1.0.0",
 	"description"    : "a simple library for get a detail of an youtube link",
 	"repository"     : {
