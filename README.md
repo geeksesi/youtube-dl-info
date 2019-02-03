@@ -27,8 +27,9 @@ youtube(link, (arr) => console.log(arr));
 it's simple just a Json object
 
 ## npm :
-
-
+```$xslt
+npm i speedster-youtube-info
+```
 
 ## license : 
 MIT :) 
